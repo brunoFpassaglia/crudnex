@@ -1,5 +1,7 @@
 # crudnex
 
+feito com nullsafety ativado, usar sdk > 2.12
+
 A new Flutter project.
 
 ## Getting Started
