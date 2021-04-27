@@ -9,9 +9,9 @@ class ProductModel {
   @HiveField(0)
   String name;
   @HiveField(1)
-  double? price;
+  double price;
   @HiveField(2)
-  int? quantity;
+  int quantity;
   @HiveField(3)
   int code;
   @HiveField(4)
@@ -23,8 +23,8 @@ class ProductModel {
 
   ProductModel({
     required this.name,
-    this.price,
-    this.quantity,
+    required this.price,
+    required this.quantity,
     required this.code,
     required this.createdAt,
     required this.updatedAt,

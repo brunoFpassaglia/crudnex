@@ -1,27 +1,41 @@
+import 'dart:convert';
+
+import 'package:crudnex/constants/constants.dart';
+import 'package:crudnex/data/models/product_model.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:crudnex/data/idata_source.dart';
+import 'package:hive/hive.dart';
 
 class LocalDataSource implements IDataSource {
   @override
-  Future delete({required String endpoint, String? jwtToken}) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete({
+    required String endpoint,
+    required int key,
+  }) async {
+    await Hive.box(endpoint).delete(key);
   }
 
   @override
-  Future get({required String endpoint, String? jwtToken}) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future get({
+    required String endpoint,
+    int? key,
+  }) async {
+    return Hive.box(endpoint).values;
   }
 
   @override
-  Future post({required String endpoint, String? jwtToken}) {
-    // TODO: implement post
-    throw UnimplementedError();
+  Future post({
+    required String endpoint,
+    required Map<String, dynamic> data,
+  }) async {
+    await Hive.box(endpoint).put(data['code'], data);
   }
 
   @override
-  Future put({required String endpoint, String? jwtToken}) {
-    // TODO: implement put
-    throw UnimplementedError();
+  Future put({
+    required String endpoint,
+    required Map<String, dynamic> data,
+  }) async {
+    await Hive.box(endpoint).put(data['code'], data);
   }
 }

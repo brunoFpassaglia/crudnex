@@ -25,10 +25,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocProvider(
       create: (_) => loginBloc,
       child: BlocBuilder<LoginBloc, LoginState>(
-        builder: (
-          context,
-          state,
-        ) {
+        builder: (context, state) {
           if (state is LoginFailure) {
             _onWidgetDidBuild(() {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -62,19 +59,6 @@ class _LoginFormState extends State<LoginForm> {
                         alignLabelWithHint: true,
                         labelText: 'Senha',
                         prefixIcon: Icon(Icons.vpn_key),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        child: Text(
-                          "Esqueci minha senha",
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                        onPressed: () {
-                          print('se fodeu nao implementei ainda');
-                        },
                       ),
                     ),
                     Row(

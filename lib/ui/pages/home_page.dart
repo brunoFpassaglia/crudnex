@@ -1,7 +1,13 @@
+import 'package:crudnex/blocs/product/product_bloc.dart';
+import 'package:crudnex/blocs/product/product_events.dart';
+import 'package:crudnex/blocs/product/product_state.dart';
 import 'package:crudnex/data/models/product_model.dart';
+import 'package:crudnex/ui/widgets/custom_error_widget.dart';
+import 'package:crudnex/ui/widgets/loading_widget.dart';
 import 'package:crudnex/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,7 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ProductModel> products = [];
+  final ProductBloc productBloc = Modular.get<ProductBloc>();
+
+  @override
+  void initState() {
+    super.initState();
+    productBloc.add(FetchProduct());
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -37,7 +50,25 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: TabBarView(
                 children: [
-                  BlocProvider(create: create),
+                  BlocProvider(
+                    create: (_) => productBloc,
+                    child: BlocBuilder<ProductBloc, ProductState>(
+                      builder: (context, state) {
+                        if (state is ProductSuccess) {
+                          return ListView(
+                            children: state.products
+                                .map((product) => Center(
+                                    child: ProductCard(productModel: product)))
+                                .toList(),
+                          );
+                        }
+                        if (state is ProductFailure) {
+                          return CustomErrorWidget();
+                        }
+                        return LoadingWidget();
+                      },
+                    ),
+                  ),
                   Text("grid"),
                 ],
               ),

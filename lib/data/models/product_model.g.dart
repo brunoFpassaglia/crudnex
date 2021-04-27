@@ -18,8 +18,8 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
     };
     return ProductModel(
       name: fields[0] as String,
-      price: fields[1] as double?,
-      quantity: fields[2] as int?,
+      price: fields[1] as double,
+      quantity: fields[2] as int,
       code: fields[3] as int,
       createdAt: fields[4] as DateTime,
       updatedAt: fields[5] as DateTime,
