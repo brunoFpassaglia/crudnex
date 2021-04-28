@@ -1,7 +1,6 @@
 import 'package:crudnex/blocs/product/product_bloc.dart';
 import 'package:crudnex/blocs/product/product_events.dart';
 import 'package:crudnex/blocs/product/product_state.dart';
-import 'package:crudnex/data/models/product_model.dart';
 import 'package:crudnex/ui/widgets/custom_error_widget.dart';
 import 'package:crudnex/ui/widgets/loading_widget.dart';
 import 'package:crudnex/ui/widgets/product_card.dart';
@@ -105,7 +104,10 @@ class _HomePageState extends State<HomePage> {
                           return ListView(
                             children: state.products
                                 .map((product) => Center(
-                                    child: ProductCard(productModel: product)))
+                                        child: ProductCard(
+                                      productModel: product,
+                                      productBloc: productBloc,
+                                    )))
                                 .toList(),
                           );
                         }

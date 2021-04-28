@@ -22,7 +22,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
     if (event is DeleteProduct) {
       try {
-        // faz o delete
+        await productRepository.deleteProduct(event.productModel);
       } catch (error) {
         yield ProductFailure();
       } finally {

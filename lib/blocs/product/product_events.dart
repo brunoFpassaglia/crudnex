@@ -1,3 +1,4 @@
+import 'package:crudnex/data/models/product_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ProductEvent extends Equatable {
@@ -9,6 +10,10 @@ class FetchProduct extends ProductEvent {}
 
 class GetProduct extends ProductEvent {}
 
-class DeleteProduct extends ProductEvent {}
+class DeleteProduct extends ProductEvent {
+  final ProductModel productModel;
+
+  DeleteProduct(this.productModel);
+}
 
 class UpdateProduct extends ProductEvent {}

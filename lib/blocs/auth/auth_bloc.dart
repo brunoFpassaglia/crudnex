@@ -25,6 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await Hive.openBox(AUTH_BOX);
       Hive.registerAdapter(ProductModelAdapter());
       await Hive.openBox(DATA_BOX);
+      await seeder.seedProducts();
       // if (loginService.hasToken()) {
       yield AuthAuthenticated();
       // } else {

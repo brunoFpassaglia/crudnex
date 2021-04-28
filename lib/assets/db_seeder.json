@@ -3,45 +3,45 @@
         "code": 0,
         "name": "martelo",
         "quantity": 10,
-        "price": 10.0,
-        "createdAt": "1969-07-20 20:18:04Z",
-        "updatedAt": "1969-07-20 20:18:04Z",
+        "price": 11.0,
+        "createdAt": "1969-07-18 20:18:04Z",
+        "updatedAt": "1969-07-18 20:18:04Z",
         "image": "image1.jpeg"
     },
     {
         "code": 1,
         "name": "foice",
         "quantity": 10,
-        "price": 10.0,
-        "createdAt": "1969-07-20 20:18:04Z",
-        "updatedAt": "1969-07-20 20:18:04Z",
+        "price": 55.0,
+        "createdAt": "1969-07-23 20:18:04Z",
+        "updatedAt": "1969-07-23 20:18:04Z",
         "image": "image2.jpeg"
     },
     {
         "code": 2,
         "name": "enxada",
         "quantity": 10,
-        "price": 10.0,
-        "createdAt": "1969-07-20 20:18:04Z",
-        "updatedAt": "1969-07-20 20:18:04Z",
+        "price": 200.0,
+        "createdAt": "1969-07-24 20:18:04Z",
+        "updatedAt": "1969-07-24 20:18:04Z",
         "image": "image3.jpeg"
     },
     {
         "code": 3,
         "name": "serrote",
         "quantity": 10,
-        "price": 10.0,
-        "createdAt": "1969-07-20 20:18:04Z",
-        "updatedAt": "1969-07-20 20:18:04Z",
+        "price": 5.0,
+        "createdAt": "1969-07-25 20:18:04Z",
+        "updatedAt": "1969-07-25 20:18:04Z",
         "image": "image4.jpeg"
     },
     {
         "code": 4,
         "name": "tesoura",
         "quantity": 10,
-        "price": 10.0,
-        "createdAt": "1969-07-20 20:18:04Z",
-        "updatedAt": "1969-07-20 20:18:04Z",
+        "price": 100.0,
+        "createdAt": "1969-07-26 20:18:04Z",
+        "updatedAt": "1969-07-26 20:18:04Z",
         "image": "image5.jpeg"
     }
 ]
