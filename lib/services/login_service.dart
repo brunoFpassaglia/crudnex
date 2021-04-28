@@ -1,33 +1,10 @@
 import 'package:hive/hive.dart';
-import 'package:crudnex/constants/auth_api.dart';
-import 'package:meagenda/http/dio_client_api.dart';
+import 'package:crudnex/constants/constants.dart';
 
-class LoginService extends DioClientApi {
+class LoginService {
   Future<String> login(
       {required String email, required String password}) async {
-    try {
-      var response = await post(
-        url: 'login',
-        data: {
-          "email": email,
-          "password": password,
-        },
-      );
-      var token = response["access_token"];
-      return token;
-    } on Exception catch (e) {
-      throw e;
-    }
-  }
-
-  Future<bool> checkToken() async {
-    try {
-      var token = await getToken();
-      var response = await get(url: 'valid', jwtToken: token);
-      return response["valid"];
-    } catch (e) {
-      return false;
-    }
+    return 'Hello';
   }
 
   //todo: deletes token from local storage and revogates it at the api

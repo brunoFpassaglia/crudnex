@@ -1,7 +1,6 @@
 import 'package:crudnex/blocs/product/product_bloc.dart';
 import 'package:crudnex/blocs/product/product_events.dart';
 import 'package:crudnex/blocs/product/product_state.dart';
-import 'package:crudnex/data/models/product_model.dart';
 import 'package:crudnex/ui/widgets/custom_error_widget.dart';
 import 'package:crudnex/ui/widgets/loading_widget.dart';
 import 'package:crudnex/ui/widgets/product_card.dart';
@@ -30,6 +29,15 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Pagina inicial"),
+          actions: [
+            Container(
+                margin: EdgeInsets.all(8), child: Icon(Icons.sort_by_alpha)),
+            Container(
+                margin: EdgeInsets.all(8),
+                child: Icon(Icons.monetization_on_rounded)),
+            Container(
+                margin: EdgeInsets.all(8), child: Icon(Icons.access_time)),
+          ],
         ),
         body: Column(
           children: [

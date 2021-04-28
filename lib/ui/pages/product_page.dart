@@ -13,6 +13,8 @@ class _ProductPageState extends State<ProductPage> {
   late TextEditingController priceController;
   late TextEditingController nameController;
   late TextEditingController quantityController;
+  final _formKey = GlobalKey<FormState>();
+  bool _btnEnabled = false;
   @override
   void initState() {
     super.initState();
@@ -49,49 +51,81 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
             Form(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              key: _formKey,
+              onChanged: () => setState(
+                  () => _btnEnabled = _formKey.currentState!.validate()),
               child: Column(
                 children: [
                   TextFormField(
                     initialValue: widget.productModel?.name,
-                    validator: (value) {
-                      if (value == null ||
-                          value.trim() == '' ||
-                          value.length < 3) {
-                        return "Nome invalido";
-                      }
-                    },
+                    validator: _nameValidator,
                     decoration: InputDecoration(
                       labelText: "Nome",
                       labelStyle: TextStyle(fontSize: 24),
                     ),
                   ),
                   TextFormField(
-                      initialValue: widget.productModel?.price.toString(),
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if ((value as int) < 0) {
-                          return "Preço inválido";
-                        }
-                      },
-                      decoration: InputDecoration(
-                        labelText: "Preço",
-                        labelStyle: TextStyle(fontSize: 24),
-                      )),
+                    initialValue: widget.productModel?.price.toString(),
+                    keyboardType: TextInputType.number,
+                    validator: _priceValidator,
+                    decoration: InputDecoration(
+                      labelText: "Preço",
+                      labelStyle: TextStyle(fontSize: 24),
+                    ),
+                  ),
                   TextFormField(
-                      initialValue: widget.productModel?.quantity.toString(),
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: "Quantidade em Estoque",
-                        labelStyle: TextStyle(fontSize: 24),
-                      )),
+                    initialValue: widget.productModel?.quantity.toString(),
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: "Quantidade em Estoque",
+                      labelStyle: TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _btnEnabled
+                              ? () {
+                                  print("validour");
+                                }
+                              : null,
+                          child: Text(
+                            "Salvar",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ButtonStyle(backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.disabled))
+                                return Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.3);
+                              return Theme.of(context).colorScheme.primary;
+                            },
+                          )),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            ))
+            ),
           ],
         ),
       ),
     );
+  }
+
+  String? _priceValidator(value) {
+    final isDigitsOnly = double.tryParse(value!);
+    return isDigitsOnly == null ? "Preço inválido" : null;
+  }
+
+  String? _nameValidator(value) {
+    if (value == null || value.trim() == '' || value.length < 3) {
+      return "Nome invalido";
+    }
   }
 }
