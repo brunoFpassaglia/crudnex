@@ -33,6 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is LoggedOut) {
       yield AuthLoading();
       await loginService.deleteToken();
+      await seeder.deleteData();
       yield AuthUnauthenticated();
     }
   }

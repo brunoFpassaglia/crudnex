@@ -16,4 +16,8 @@ class DbSeeder {
       Hive.box(DATA_BOX).put(element.code, element);
     });
   }
+
+  Future deleteData() async {
+    await Hive.box(DATA_BOX).deleteFromDisk();
+  }
 }
