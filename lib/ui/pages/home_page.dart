@@ -1,3 +1,5 @@
+import 'package:crudnex/blocs/auth/auth_bloc.dart';
+import 'package:crudnex/blocs/auth/auth_events.dart';
 import 'package:crudnex/blocs/product/product_bloc.dart';
 import 'package:crudnex/blocs/product/product_events.dart';
 import 'package:crudnex/blocs/product/product_state.dart';
@@ -65,15 +67,27 @@ class _HomePageState extends State<HomePage> {
                   },
                 )),
             Container(
-                margin: EdgeInsets.all(4),
-                child: IconButton(
-                  icon: Icon(Icons.access_time),
-                  onPressed: () {
-                    setState(() {
-                      _orderBy = _orderByUpdateAt;
-                    });
-                  },
-                )),
+              margin: EdgeInsets.all(4),
+              child: IconButton(
+                icon: Icon(Icons.access_time),
+                onPressed: () {
+                  setState(() {
+                    _orderBy = _orderByUpdateAt;
+                  });
+                },
+              ),
+            ),
+            Container(
+              child: IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  color: Theme.of(context).errorColor,
+                ),
+                onPressed: () {
+                  Modular.get<AuthBloc>().add(LoggedOut());
+                },
+              ),
+            )
           ],
         ),
         body: Column(

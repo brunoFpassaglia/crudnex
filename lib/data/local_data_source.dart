@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:crudnex/constants/constants.dart';
 import 'package:crudnex/data/models/product_model.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:crudnex/data/idata_source.dart';
 import 'package:hive/hive.dart';
 
@@ -10,7 +9,7 @@ class LocalDataSource implements IDataSource {
   @override
   Future<void> delete({
     required String endpoint,
-    required int key,
+    required String key,
   }) async {
     await Hive.box(endpoint).delete(key);
   }
@@ -18,7 +17,7 @@ class LocalDataSource implements IDataSource {
   @override
   Future get({
     required String endpoint,
-    int? key,
+    String? key,
   }) async {
     return Hive.box(endpoint).values;
   }
@@ -27,8 +26,9 @@ class LocalDataSource implements IDataSource {
   Future post({
     required String endpoint,
     required Map<String, dynamic> data,
-  }) =>
-      post(endpoint: endpoint, data: data);
+  }) async {
+    await Hive.box(endpoint).put(data.keys.first, data.values.first);
+  }
 
   @override
   Future put({

@@ -19,7 +19,8 @@ class ProductRepository {
 
   Future<void> deleteProduct(ProductModel productModel) async {
     try {
-      await dataSource.delete(endpoint: DATA_BOX, key: productModel.code);
+      await dataSource.delete(
+          endpoint: DATA_BOX, key: productModel.code.toString());
     } catch (error) {
       rethrow;
     }
@@ -28,6 +29,8 @@ class ProductRepository {
   Future<void> putProduct(ProductModel productModel) async {
     try {
       await dataSource.put(endpoint: DATA_BOX, data: productModel.toMap());
-    } catch (error) {}
+    } catch (error) {
+      rethrow;
+    }
   }
 }

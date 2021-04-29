@@ -14,17 +14,6 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text("Login"),
           centerTitle: true,
-          actions: [
-            TextButton(
-              child: Text(
-                "Criar Conta",
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/register');
-              },
-            ),
-          ],
         ),
         body: LoginForm());
   }
