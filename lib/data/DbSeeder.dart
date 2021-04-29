@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 
 class DbSeeder {
-  Future seedProducts() async {
+  Future<void> seedProducts() async {
     Iterable objs =
         json.decode(await rootBundle.loadString('lib/assets/db_seeder.json'));
     List<ProductModel> products =
@@ -17,7 +17,7 @@ class DbSeeder {
     });
   }
 
-  Future deleteData() async {
-    await Hive.box(DATA_BOX).deleteFromDisk();
+  Future<void> deleteData() async {
+    Hive.box(DATA_BOX).deleteFromDisk();
   }
 }
