@@ -39,6 +39,7 @@ class _LoginFormState extends State<LoginForm> {
           }
           return Container(
             child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16, 150, 16, 30),
                 child: ListView(
@@ -54,6 +55,13 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                     TextFormField(
                       controller: _passwordController,
+                      validator: (value) {
+                        if (value == null ||
+                            value.trim() == '' ||
+                            value.length < 6) {
+                          return 'A senha deve conter ao menos 6 caracteres';
+                        }
+                      },
                       obscureText: true,
                       decoration: InputDecoration(
                         alignLabelWithHint: true,

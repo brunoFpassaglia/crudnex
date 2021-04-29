@@ -40,121 +40,100 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Pagina inicial"),
-          actions: [
-            Container(
-                margin: EdgeInsets.all(4),
-                child: IconButton(
-                  icon: Icon(Icons.sort_by_alpha),
-                  onPressed: () {
-                    setState(() {
-                      _orderBy = _orderByAlphabetical;
-                    });
-                  },
-                )),
-            Container(
-                margin: EdgeInsets.all(4),
-                child: IconButton(
-                  icon: Icon(Icons.monetization_on_rounded),
-                  onPressed: () {
-                    setState(() {
-                      _orderBy = _orderByPrice;
-                    });
-                  },
-                )),
-            Container(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Pagina inicial"),
+        actions: [
+          Container(
               margin: EdgeInsets.all(4),
               child: IconButton(
-                icon: Icon(Icons.access_time),
+                icon: Icon(Icons.sort_by_alpha),
                 onPressed: () {
                   setState(() {
-                    _orderBy = _orderByUpdateAt;
+                    _orderBy = _orderByAlphabetical;
                   });
                 },
-              ),
-            ),
-            Container(
+              )),
+          Container(
+              margin: EdgeInsets.all(4),
               child: IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: Theme.of(context).errorColor,
-                ),
+                icon: Icon(Icons.monetization_on_rounded),
                 onPressed: () {
-                  Modular.get<AuthBloc>().add(LoggedOut());
+                  setState(() {
+                    _orderBy = _orderByPrice;
+                  });
+                },
+              )),
+          Container(
+            margin: EdgeInsets.all(4),
+            child: IconButton(
+              icon: Icon(Icons.access_time),
+              onPressed: () {
+                setState(() {
+                  _orderBy = _orderByUpdateAt;
+                });
+              },
+            ),
+          ),
+          Container(
+            child: IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Theme.of(context).errorColor,
+              ),
+              onPressed: () {
+                Modular.get<AuthBloc>().add(LoggedOut());
+              },
+            ),
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: BlocProvider<ProductBloc>.value(
+              value: productBloc,
+              child: BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductSuccess) {
+                    state.products.sort(_orderBy);
+                    return GridView.count(
+                      crossAxisCount: 2,
+                      children: state.products
+                          .map((product) => Center(
+                                  child: ProductCard(
+                                productModel: product,
+                                productBloc: productBloc,
+                              )))
+                          .toList(),
+                    );
+                  }
+                  if (state is ProductEmpty) {
+                    return Center(
+                      child: Container(
+                        child: Text("Não existem produtos salvos"),
+                      ),
+                    );
+                  }
+                  if (state is ProductFailure) {
+                    return CustomErrorWidget();
+                  }
+                  return LoadingWidget();
                 },
               ),
-            )
-          ],
-        ),
-        body: Column(
-          children: [
-            TabBar(
-              tabs: [
-                Container(
-                    child: Icon(
-                  Icons.list_alt,
-                  size: 40,
-                )),
-                Container(
-                    child: Icon(
-                  Icons.grid_on,
-                  size: 40,
-                ))
-              ],
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  BlocProvider<ProductBloc>.value(
-                    value: productBloc,
-                    child: BlocBuilder<ProductBloc, ProductState>(
-                      builder: (context, state) {
-                        if (state is ProductSuccess) {
-                          state.products.sort(_orderBy);
-                          return ListView(
-                            children: state.products
-                                .map((product) => Center(
-                                        child: ProductCard(
-                                      productModel: product,
-                                      productBloc: productBloc,
-                                    )))
-                                .toList(),
-                          );
-                        }
-                        if (state is ProductEmpty) {
-                          return Center(
-                            child: Container(
-                              child: Text("Não existem produtos salvos"),
-                            ),
-                          );
-                        }
-                        if (state is ProductFailure) {
-                          return CustomErrorWidget();
-                        }
-                        return LoadingWidget();
-                      },
-                    ),
-                  ),
-                  Text("grid"),
-                ],
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Modular.to.pushNamed('/product', arguments: null);
-            },
-            child: Icon(
-              Icons.add,
-              color: Theme.of(context).scaffoldBackgroundColor,
-            ),
-            backgroundColor: Theme.of(context).primaryColor),
+          ),
+        ],
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Modular.to.pushNamed('/product', arguments: null);
+          },
+          child: Icon(
+            Icons.add,
+            color: Theme.of(context).scaffoldBackgroundColor,
+          ),
+          backgroundColor: Theme.of(context).primaryColor),
     );
   }
 }

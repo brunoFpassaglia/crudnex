@@ -7,7 +7,6 @@ import 'package:crudnex/blocs/product/product_events.dart';
 import 'package:crudnex/blocs/product/product_state.dart';
 import 'package:crudnex/data/models/product_model.dart';
 import 'package:crudnex/data/repositories/product_repository.dart';
-import 'package:crudnex/services/login_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular_test/flutter_modular_test.dart';
 import 'package:hive/hive.dart';

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:crudnex/app_module.dart';
 import 'package:crudnex/blocs/login/login_bloc.dart';
 import 'package:crudnex/blocs/login/login_events.dart';
