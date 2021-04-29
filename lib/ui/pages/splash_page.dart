@@ -1,15 +1,43 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
+  late AnimationController animationController = AnimationController(
+    duration: const Duration(seconds: 3),
+    vsync: this,
+  )..repeat();
+  double angle = 10;
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("splash"),
+    return Scaffold(
+      body: AnimatedBuilder(
+        animation: animationController,
+        builder: (BuildContext context, Widget? child) {
+          return Transform.rotate(
+            angle: angle * animationController.value,
+            child: child,
+          );
+        },
+        child: Center(
+          child: Container(
+            child: Text("Rodaaaando"),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -35,6 +35,7 @@ class _ProductPageState extends State<ProductPage> {
         TextEditingController(text: widget.productModel?.name.toString());
     quantityController =
         TextEditingController(text: widget.productModel?.quantity.toString());
+    _productImage = widget.productModel?.image;
   }
 
   @override
@@ -70,11 +71,11 @@ class _ProductPageState extends State<ProductPage> {
                       child: Container(
                         height: 150,
                         width: 150,
-                        child: _productImage == null
-                            ? widget.productModel?.image == null
-                                ? Image.asset('lib/assets/default.jpeg')
-                                : Image.asset(widget.productModel!.image!)
-                            : Image.file(File(_productImage!)),
+                        child: _productImage != null
+                            ? _productImage!.startsWith('lib')
+                                ? Image.asset(_productImage!)
+                                : Image.file(File(_productImage!))
+                            : Image.asset('lib/assets/default.jpeg'),
                       ),
                     ),
                   ),
@@ -164,7 +165,12 @@ class _ProductPageState extends State<ProductPage> {
                             children: [
                               Expanded(
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    productBloc.add(
+                                      DeleteProduct(widget.productModel!),
+                                    );
+                                    Modular.to.pop();
+                                  },
                                   child: Text("Deletar"),
                                   style: ButtonStyle(
                                     backgroundColor:
