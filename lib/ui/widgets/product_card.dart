@@ -4,6 +4,7 @@ import 'package:crudnex/blocs/product/product_bloc.dart';
 import 'package:crudnex/blocs/product/product_events.dart';
 import 'package:crudnex/data/models/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ProductCard extends StatelessWidget {
@@ -15,6 +16,7 @@ class ProductCard extends StatelessWidget {
     required this.productModel,
     required this.productBloc,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

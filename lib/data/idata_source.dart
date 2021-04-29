@@ -1,7 +1,7 @@
 abstract class IDataSource {
   Future<dynamic> get({
     required String endpoint,
-    int? key,
+    String? key,
   });
 
   Future<dynamic> post({
