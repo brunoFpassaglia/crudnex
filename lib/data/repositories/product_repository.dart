@@ -19,8 +19,7 @@ class ProductRepository {
 
   Future<void> deleteProduct(ProductModel productModel) async {
     try {
-      await dataSource.delete(
-          endpoint: DATA_BOX, key: productModel.code.toString());
+      await dataSource.delete(endpoint: DATA_BOX, key: productModel.code);
     } catch (error) {
       rethrow;
     }

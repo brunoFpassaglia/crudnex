@@ -1,7 +1,7 @@
 abstract class IDataSource {
   Future<dynamic> get({
     required String endpoint,
-    String? key,
+    int? key,
   });
 
   Future<dynamic> post({
@@ -16,6 +16,6 @@ abstract class IDataSource {
 
   Future<void> delete({
     required String endpoint,
-    required String key,
+    required int key,
   });
 }
