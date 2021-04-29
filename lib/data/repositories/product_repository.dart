@@ -24,4 +24,10 @@ class ProductRepository {
       rethrow;
     }
   }
+
+  Future<void> putProduct(ProductModel productModel) async {
+    try {
+      await dataSource.put(endpoint: DATA_BOX, data: productModel.toMap());
+    } catch (error) {}
+  }
 }

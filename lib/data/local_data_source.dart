@@ -27,15 +27,14 @@ class LocalDataSource implements IDataSource {
   Future post({
     required String endpoint,
     required Map<String, dynamic> data,
-  }) async {
-    await Hive.box(endpoint).put(data['code'], data);
-  }
+  }) =>
+      post(endpoint: endpoint, data: data);
 
   @override
   Future put({
     required String endpoint,
     required Map<String, dynamic> data,
   }) async {
-    await Hive.box(endpoint).put(data['code'], data);
+    await Hive.box(endpoint).put(data['code'], ProductModel.fromMap(data));
   }
 }

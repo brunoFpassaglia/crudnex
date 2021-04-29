@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:crudnex/blocs/product/product_bloc.dart';
 import 'package:crudnex/blocs/product/product_events.dart';
 import 'package:crudnex/data/models/product_model.dart';
@@ -31,11 +33,11 @@ class ProductCard extends StatelessWidget {
                 margin: EdgeInsets.all(3.0),
                 height: 80,
                 width: 130,
-                child: Image(
-                  //todo: colocar uma imagem padrao
-                  image: AssetImage('lib/assets/${productModel.image}'),
-                  fit: BoxFit.fill,
-                ),
+                child: productModel.image != null
+                    ? productModel.image!.startsWith('lib')
+                        ? Image.asset(productModel.image!)
+                        : Image.file(File(productModel.image!))
+                    : Image.asset('lib/assets/default.jpeg'),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

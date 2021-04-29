@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           title: Text("Pagina inicial"),
           actions: [
             Container(
-                margin: EdgeInsets.all(8),
+                margin: EdgeInsets.all(4),
                 child: IconButton(
                   icon: Icon(Icons.sort_by_alpha),
                   onPressed: () {
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 )),
             Container(
-                margin: EdgeInsets.all(8),
+                margin: EdgeInsets.all(4),
                 child: IconButton(
                   icon: Icon(Icons.monetization_on_rounded),
                   onPressed: () {
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 )),
             Container(
-                margin: EdgeInsets.all(8),
+                margin: EdgeInsets.all(4),
                 child: IconButton(
                   icon: Icon(Icons.access_time),
                   onPressed: () {
@@ -95,8 +95,8 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: TabBarView(
                 children: [
-                  BlocProvider(
-                    create: (_) => productBloc,
+                  BlocProvider<ProductBloc>.value(
+                    value: productBloc,
                     child: BlocBuilder<ProductBloc, ProductState>(
                       builder: (context, state) {
                         if (state is ProductSuccess) {
@@ -109,6 +109,13 @@ class _HomePageState extends State<HomePage> {
                                       productBloc: productBloc,
                                     )))
                                 .toList(),
+                          );
+                        }
+                        if (state is ProductEmpty) {
+                          return Center(
+                            child: Container(
+                              child: Text("Não existem produtos salvos"),
+                            ),
                           );
                         }
                         if (state is ProductFailure) {
@@ -124,6 +131,15 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Modular.to.pushNamed('/product', arguments: null);
+            },
+            child: Icon(
+              Icons.add,
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            backgroundColor: Theme.of(context).primaryColor),
       ),
     );
   }

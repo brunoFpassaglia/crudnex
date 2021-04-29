@@ -15,10 +15,8 @@ class ProductModel {
   @HiveField(3)
   int code;
   @HiveField(4)
-  DateTime createdAt;
-  @HiveField(5)
   DateTime updatedAt;
-  @HiveField(6)
+  @HiveField(5)
   String? image;
 
   ProductModel({
@@ -26,7 +24,6 @@ class ProductModel {
     required this.price,
     required this.quantity,
     required this.code,
-    required this.createdAt,
     required this.updatedAt,
     this.image,
   });
@@ -37,8 +34,7 @@ class ProductModel {
       'price': price,
       'quantity': quantity,
       'code': code,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
+      'updatedAt': updatedAt.toString(),
       'image': image
     };
   }
@@ -49,7 +45,6 @@ class ProductModel {
       price: map['price'],
       quantity: map['quantity'],
       code: map['code'],
-      createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['updatedAt']),
       image: map['image'],
     );

@@ -15,7 +15,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       yield ProductLoading();
       try {
         List<ProductModel> products = await productRepository.fetchProducts();
-        yield ProductSuccess(products: products);
+        if (products.isEmpty) {
+          yield ProductEmpty();
+        } else {
+          yield ProductSuccess(products: products);
+        }
       } catch (error) {
         yield ProductFailure();
       }
@@ -29,10 +33,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         this.add(FetchProduct());
       }
     }
-    if (event is UpdateProduct) {
+    if (event is InserOrUpdateProduct) {
       yield ProductLoading();
       try {
-        // faz o update
+        await productRepository.putProduct(event.productModel);
       } catch (error) {
         yield ProductFailure();
       } finally {

@@ -21,16 +21,15 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       price: fields[1] as double,
       quantity: fields[2] as int,
       code: fields[3] as int,
-      createdAt: fields[4] as DateTime,
-      updatedAt: fields[5] as DateTime,
-      image: fields[6] as String?,
+      updatedAt: fields[4] as DateTime,
+      image: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProductModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -40,10 +39,8 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       ..writeByte(3)
       ..write(obj.code)
       ..writeByte(4)
-      ..write(obj.createdAt)
-      ..writeByte(5)
       ..write(obj.updatedAt)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.image);
   }
 

@@ -16,4 +16,8 @@ class DeleteProduct extends ProductEvent {
   DeleteProduct(this.productModel);
 }
 
-class UpdateProduct extends ProductEvent {}
+class InserOrUpdateProduct extends ProductEvent {
+  final ProductModel productModel;
+
+  InserOrUpdateProduct({required this.productModel});
+}

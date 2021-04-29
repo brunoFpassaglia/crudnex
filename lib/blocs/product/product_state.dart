@@ -14,4 +14,6 @@ class ProductSuccess extends ProductState {
   ProductSuccess({required this.products});
 }
 
+class ProductEmpty extends ProductState {}
+
 class ProductFailure extends ProductState {}
