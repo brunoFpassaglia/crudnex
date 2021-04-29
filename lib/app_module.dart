@@ -30,8 +30,8 @@ class AppModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(
       '/',
-      child: (_, __) => BlocProvider(
-        create: (_) => Modular.get<AuthBloc>(),
+      child: (_, __) => BlocProvider<AuthBloc>.value(
+        value: Modular.get<AuthBloc>(),
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if (state is AuthUninitialized) {

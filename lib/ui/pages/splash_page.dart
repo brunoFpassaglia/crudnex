@@ -10,10 +10,10 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late AnimationController animationController = AnimationController(
-    duration: const Duration(seconds: 3),
+    duration: const Duration(seconds: 8),
     vsync: this,
   )..repeat();
-  double angle = 10;
+  double angle = 20;
 
   @override
   void dispose() {
@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         },
         child: Center(
           child: Container(
-            child: Text("Rodaaaando"),
+            child: Image.asset('lib/assets/nexlogo.png'),
           ),
         ),
       ),

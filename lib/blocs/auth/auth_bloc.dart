@@ -21,7 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is AppStarted) {
-      yield AuthUninitialized();
+      // yield AuthUninitialized();
       await Hive.openBox(AUTH_BOX);
       Hive.registerAdapter(ProductModelAdapter());
       await Hive.openBox(DATA_BOX);
