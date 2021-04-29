@@ -14,7 +14,7 @@ class CustomErrorWidget extends StatelessWidget {
           ),
           Container(
             child: Text(
-              "Algo de errado nao esta certo",
+              "Algo de errado não está certo",
               style: TextStyle(color: Theme.of(context).errorColor),
             ),
           ),

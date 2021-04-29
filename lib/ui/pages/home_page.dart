@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     return a.updatedAt.compareTo(b.updatedAt);
   }
 
+  // products are loaded alphabetically by default
   @override
   void initState() {
     super.initState();
@@ -93,6 +94,8 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: BlocProvider<ProductBloc>.value(
               value: productBloc,
+              // depending on the product_bloc state, can be rendered the grid,
+              // a msg when there are no products, or an error widget
               child: BlocBuilder<ProductBloc, ProductState>(
                 builder: (context, state) {
                   if (state is ProductSuccess) {
@@ -125,6 +128,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      // navigates to product page to add a new product
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Modular.to.pushNamed('/product', arguments: null);

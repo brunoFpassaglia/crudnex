@@ -9,7 +9,6 @@ class ProductRepository {
   Future<List<ProductModel>> fetchProducts() async {
     try {
       var data = await dataSource.get(endpoint: DATA_BOX);
-      // final products = data.map<ProductModel>((product) => product).toList();
       final products = List<ProductModel>.from(data);
       return products;
     } catch (error) {
