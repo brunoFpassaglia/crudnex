@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
+  //dependency injection system
   @override
   final List<Bind> binds = [
     Bind<AuthBloc>((_) => AuthBloc()),
@@ -28,6 +29,7 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
+    // the / route is setted according to auth state
     ChildRoute(
       '/',
       child: (_, __) => BlocProvider<AuthBloc>.value(
